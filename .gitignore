@@ -1,0 +1,7 @@
+sim
+gls
+mult.vcd
+*.log
+*.jou
+*.str
+__pycache__/
