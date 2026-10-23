@@ -37,3 +37,21 @@ FAIL: 256 vectors checked, 95 errors
 The source in `rtl/full_adder.v` was not modified by this check. The hand-worked
 roll-number example and waveform screenshot will be added after the team roll number is
 provided and the waveform view is captured.
+
+## Part B: logic synthesis
+
+The Yosys flow reads the RTL, flattens the design, maps sequential and combinational
+logic to the SKY130 high-density library, writes a cell statistics report, and exports
+the mapped netlist.
+
+Command to run inside the assignment's IIC-OSIC-TOOLS environment from the repository
+root:
+
+```sh
+yosys -c synth/synth.tcl
+```
+
+The flow requires `PDK_ROOT` to point to an installation containing the `sky130A`
+PDK. Generated outputs are `synth/mult_array_stat.rpt` and
+`synth/mult_array_netlist.v`. The netlist simulation and synthesis results table will
+be recorded after running this flow in the PDK environment.
