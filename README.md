@@ -88,3 +88,22 @@ vvp gls
 
 Result: `PASS: 256 vectors checked, 0 errors`. The testbench samples 2 ns after the
 second active clock edge so the unit-delay standard-cell models have time to settle.
+
+## Part C: static timing analysis
+
+The OpenSTA setup reads the mapped SKY130A netlist and the typical-corner Liberty
+model. The SDC applies a 2.788 ns clock, 1 ns input delays (including reset), and 1 ns
+output delays. The script records the worst setup path and worst setup/hold slack in
+`sta/mult_array_timing.rpt`.
+
+Run from the repository root in the IIC-OSIC-TOOLS environment after selecting the
+`sky130A` PDK:
+
+```sh
+sta -exit sta/sta.tcl > sta/mult_array_timing.rpt 2>&1
+```
+
+An initial 10 ns analysis reported 7.213 ns worst setup slack, corresponding to an
+estimated minimum period of 2.787 ns. The final analysis uses 2.788 ns to avoid
+rounding the setup slack below zero; its OpenSTA report is in
+`sta/mult_array_timing.rpt`.
