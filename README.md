@@ -190,10 +190,12 @@ cp pnr/runs/assignment-150um-6p5ns/final/gds/mult_array.gds pnr/mult_array.gds
 | --- | ---: |
 | Clock target / attempts | 6.5 ns / 7 |
 | Die area / core area | 22,500 µm² / 17,759.5 µm² |
+| Cells after synthesis (Part B) | 61 |
 | Standard-cell area / count | 1,224.92 µm² / 327 |
 | Added implementation cells | 1,550 fill, 245 tap, 3 clock buffers, 17 timing-repair buffers |
 | Routed wirelength | 2,361 µm |
 | Worst setup slack, slow corner | 0.150 ns |
+| Part C pre-route Fmax estimate | 358.808 MHz |
 | Post-route Fmax estimate | 157.48 MHz |
 | Magic / KLayout DRC errors | 0 / 0 |
 | LVS errors | 0 |
@@ -225,7 +227,7 @@ The completed written report is [report/report.pdf](report/report.pdf).
    compared with the compact combinational datapath.
 4. Placement and routing add clock-tree and timing-repair buffers and routed
    parasitics, which affect setup delay. Physical design also adds tap and
-   filler cells. The final post-route frequency estimate is 157.48 MHz.
+   filler cells. The Part C pre-route estimate is 358.808 MHz, compared with 157.48 MHz after routing, where the final clock target is 6.5 ns and the worst slow-corner slack is 0.150 ns.
 5. DRC checks layout geometry against manufacturing rules, such as width,
    spacing, and enclosure. LVS compares extracted devices and connections with
    the reference netlist. Both checks reported zero errors in the final run.
