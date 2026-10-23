@@ -107,3 +107,35 @@ An initial 10 ns analysis reported 7.213 ns worst setup slack, corresponding to 
 estimated minimum period of 2.787 ns. The final analysis uses 2.788 ns to avoid
 rounding the setup slack below zero; its OpenSTA report is in
 `sta/mult_array_timing.rpt`.
+
+## Part D: physical design
+
+The LibreLane configuration targets the SKY130A high-density standard-cell
+library and uses the RTL source. Place and route uses a 10 ns clock target with
+explicit 1 ns input and output delays. Floorplan utilization is set to 30%, with
+40% placement density.
+Run the physical-design flow from the repository root in the IIC-OSIC-TOOLS
+environment:
+
+```sh
+librelane --manual-pdk --pdk-root "$PDK_ROOT" -p sky130A -f classic pnr/config.json
+```
+
+The completed flow reports **Passed**. It generated the final GDSII at
+`pnr/final/gds/mult_array.gds` and a rendered layout at
+`pnr/final/render/mult_array.png`. The physical-design summary, metrics, and
+DRC/LVS/timing evidence are under `pnr/final/`.
+
+| Physical-design result | Value |
+| --- | ---: |
+| Clock target | 10 ns (100 MHz) |
+| Die area | 4,416.83 µm² |
+| Core area | 2,454.85 µm² |
+| Standard-cell area / count | 969.68 µm² / 113 |
+| Reported power estimate | 0.219 mW |
+| Worst setup slack, slow corner | 3.778 ns |
+| Setup/hold violations | 0 / 0 |
+| Magic / KLayout DRC errors | 0 / 0 |
+| LVS differences | 0 |
+
+![Rendered SKY130 physical layout](pnr/final/render/mult_array.png)

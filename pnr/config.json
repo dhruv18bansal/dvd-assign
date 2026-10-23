@@ -1,0 +1,15 @@
+{
+  "DESIGN_NAME": "mult_array",
+  "VERILOG_FILES": [
+    "dir::../rtl/full_adder.v",
+    "dir::../rtl/mult_array.v"
+  ],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 10.0,
+  "PNR_SDC_FILE": "dir::mult_array_pnr.sdc",
+  "SIGNOFF_SDC_FILE": "dir::mult_array_pnr.sdc",
+  "PDK": "sky130A",
+  "STD_CELL_LIBRARY": "sky130_fd_sc_hd",
+  "FP_CORE_UTIL": 30,
+  "PL_TARGET_DENSITY_PCT": 40
+}
