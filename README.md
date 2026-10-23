@@ -4,8 +4,8 @@
 
 | Team member | Roll number |
 | --- | --- |
-| TODO | TODO |
-| TODO | TODO |
+| Dhruv Bansal | 2023102048 |
+| Dataarnoor Singh Oberoi | 2023102047 |
 
 ## Part A: RTL design and verification
 
@@ -34,9 +34,24 @@ reported:
 FAIL: 256 vectors checked, 95 errors
 ```
 
-The source in `rtl/full_adder.v` was not modified by this check. The hand-worked
-roll-number example and waveform screenshot will be added after the team roll number is
-provided and the waveform view is captured.
+The source in `rtl/full_adder.v` was not modified by this check. For the required
+hand-worked example, Dhruv Bansal's roll number ends in 8, so A = 8 + 5 = 13 and B = 7.
+The multiplication is:
+
+```text
+       1101  (13)
+     x 0111  (7)
+     ------
+    00001101  pp0
+    00011010  pp1, shifted left by 1
+    00110100  pp2, shifted left by 2
+    00000000  pp3, shifted left by 3
+    --------
+    01011011  (91)
+```
+
+The waveform screenshot remains to be captured and annotated with the two-cycle
+latency.
 
 ## Part B: logic synthesis
 
