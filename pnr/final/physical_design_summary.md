@@ -1,41 +1,24 @@
-# Physical design summary
+# SKY130A physical-design summary
 
-## Run configuration
+The final fixed-die run completed at a 6.5 ns clock target after seven attempts
+at 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, and 6.5 ns. The earlier attempts failed slow-corner
+setup checks. The final run completed setup, DRC, and LVS signoff.
 
-- Flow: LibreLane Classic
-- Process: SKY130A, `sky130_fd_sc_hd`
-- Clock constraint: 10 ns (100 MHz)
-- Input and output delays: 1 ns each
-- Floorplan utilization: 30%; placement target density: 40%
-
-## Results
-
-| Metric | Result |
+| Metric | Final result |
 | --- | ---: |
-| Die area | 4,416.83 µm² |
-| Core area | 2,454.85 µm² |
-| Standard-cell area | 969.68 µm² |
-| Standard-cell instances | 113 |
-| Total placed instances | 318 |
-| Total reported power | 0.219 mW |
-| Worst setup slack, slow corner (`max_ss_100C_1v60`) | 3.778 ns |
-| Worst setup slack, typical corner (`nom_tt_025C_1v80`) | 7.013 ns |
-| Setup and hold violations | 0 |
-| Magic DRC errors | 0 |
-| KLayout DRC errors | 0 |
-| LVS device/net differences | 0 |
+| Die boundary | 150 µm × 150 µm |
+| Die area | 22,500 µm² |
+| Core area | 17,759.5 µm² |
+| Clock period | 6.5 ns |
+| Standard-cell area / count | 1,224.92 µm² / 327 |
+| Fill / tap cells | 1,550 / 245 |
+| Clock / timing-repair buffers | 3 / 17 |
+| Routed wirelength | 2,361 µm |
+| Worst slow-corner setup slack | 0.14985 ns |
+| Post-route frequency estimate | 157.48 MHz |
+| Magic / KLayout DRC errors | 0 / 0 |
+| LVS errors | 0 |
 
-Power is the flow's reported estimate; no testbench activity file was supplied to
-the physical-design flow.
-
-## Generated views
-
-- `gds/mult_array.gds`: final streamout for submission
-- `render/mult_array.png`: rendered routed layout
-- `metrics.json` and `metrics.csv`: LibreLane run metrics
-- `nl/mult_array.nl.v`: final gate-level netlist
-- `lef/mult_array.lef` and `def/mult_array.def`: layout abstracts and placement
-- `signoff/`: DRC, LVS, and timing summaries
-
-The final flow reported **Passed**, with zero setup violations, zero hold
-violations, zero Magic/KLayout DRC errors, and matching LVS circuits.
+The post-route frequency estimate is calculated as `1000 / (6.5 - 0.14985)` MHz.
+The corresponding detailed metrics are in `metrics.json`; signoff reports are in
+`signoff/`.

@@ -5,7 +5,7 @@ current_design mult_array
 ###############################################################################
 # Timing Constraints
 ###############################################################################
-create_clock -name clk -period 10.0000 [get_ports {clk}]
+create_clock -name clk -period 6.5000 [get_ports {clk}]
 set_propagated_clock [get_clocks {clk}]
 set_input_delay 1.0000 -clock [get_clocks {clk}] -add_delay [get_ports {a[0]}]
 set_input_delay 1.0000 -clock [get_clocks {clk}] -add_delay [get_ports {a[1]}]

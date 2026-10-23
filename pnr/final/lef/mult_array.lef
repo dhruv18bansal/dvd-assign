@@ -6,17 +6,17 @@ MACRO mult_array
   CLASS BLOCK ;
   FOREIGN mult_array ;
   ORIGIN 0.000 0.000 ;
-  SIZE 61.315 BY 72.035 ;
+  SIZE 150.000 BY 150.000 ;
   PIN VGND
     DIRECTION INOUT ;
     USE GROUND ;
     PORT
       LAYER met4 ;
-        RECT 24.340 10.640 25.940 60.080 ;
+        RECT 24.340 10.640 25.940 138.960 ;
     END
     PORT
       LAYER met5 ;
-        RECT 5.520 30.030 55.660 31.630 ;
+        RECT 5.520 30.030 144.440 31.630 ;
     END
   END VGND
   PIN VPWR
@@ -24,11 +24,11 @@ MACRO mult_array
     USE POWER ;
     PORT
       LAYER met4 ;
-        RECT 21.040 10.640 22.640 60.080 ;
+        RECT 21.040 10.640 22.640 138.960 ;
     END
     PORT
       LAYER met5 ;
-        RECT 5.520 26.730 55.660 28.330 ;
+        RECT 5.520 26.730 144.440 28.330 ;
     END
   END VPWR
   PIN a[0]
@@ -36,8 +36,8 @@ MACRO mult_array
     USE SIGNAL ;
     ANTENNAGATEAREA 0.159000 ;
     PORT
-      LAYER met3 ;
-        RECT 0.000 20.440 0.600 21.040 ;
+      LAYER met2 ;
+        RECT 53.450 0.000 53.730 0.280 ;
     END
   END a[0]
   PIN a[1]
@@ -46,7 +46,7 @@ MACRO mult_array
     ANTENNAGATEAREA 0.159000 ;
     PORT
       LAYER met2 ;
-        RECT 15.730 0.000 16.010 0.280 ;
+        RECT 59.890 0.000 60.170 0.280 ;
     END
   END a[1]
   PIN a[2]
@@ -55,7 +55,7 @@ MACRO mult_array
     ANTENNAGATEAREA 0.159000 ;
     PORT
       LAYER met3 ;
-        RECT 0.000 25.880 0.600 26.480 ;
+        RECT 0.000 57.160 0.600 57.760 ;
     END
   END a[2]
   PIN a[3]
@@ -64,7 +64,7 @@ MACRO mult_array
     ANTENNAGATEAREA 0.159000 ;
     PORT
       LAYER met3 ;
-        RECT 0.000 27.240 0.600 27.840 ;
+        RECT 0.000 63.960 0.600 64.560 ;
     END
   END a[3]
   PIN b[0]
@@ -73,7 +73,7 @@ MACRO mult_array
     ANTENNAGATEAREA 0.159000 ;
     PORT
       LAYER met2 ;
-        RECT 24.930 0.000 25.210 0.280 ;
+        RECT 58.050 0.000 58.330 0.280 ;
     END
   END b[0]
   PIN b[1]
@@ -82,7 +82,7 @@ MACRO mult_array
     ANTENNAGATEAREA 0.159000 ;
     PORT
       LAYER met2 ;
-        RECT 23.090 0.000 23.370 0.280 ;
+        RECT 58.970 0.000 59.250 0.280 ;
     END
   END b[1]
   PIN b[2]
@@ -91,7 +91,7 @@ MACRO mult_array
     ANTENNAGATEAREA 0.159000 ;
     PORT
       LAYER met3 ;
-        RECT 0.000 34.040 0.600 34.640 ;
+        RECT 0.000 73.480 0.600 74.080 ;
     END
   END b[2]
   PIN b[3]
@@ -100,7 +100,7 @@ MACRO mult_array
     ANTENNAGATEAREA 0.159000 ;
     PORT
       LAYER met3 ;
-        RECT 0.000 36.760 0.600 37.360 ;
+        RECT 0.000 80.280 0.600 80.880 ;
     END
   END b[3]
   PIN clk
@@ -108,8 +108,8 @@ MACRO mult_array
     USE SIGNAL ;
     ANTENNAGATEAREA 0.852000 ;
     PORT
-      LAYER met3 ;
-        RECT 0.000 54.440 0.600 55.040 ;
+      LAYER met2 ;
+        RECT 47.010 0.000 47.290 0.280 ;
     END
   END clk
   PIN p[0]
@@ -118,7 +118,7 @@ MACRO mult_array
     ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met2 ;
-        RECT 45.170 0.000 45.450 0.280 ;
+        RECT 100.370 0.000 100.650 0.280 ;
     END
   END p[0]
   PIN p[1]
@@ -126,8 +126,8 @@ MACRO mult_array
     USE SIGNAL ;
     ANTENNADIFFAREA 0.445500 ;
     PORT
-      LAYER met3 ;
-        RECT 60.715 17.720 61.315 18.320 ;
+      LAYER met2 ;
+        RECT 102.210 0.000 102.490 0.280 ;
     END
   END p[1]
   PIN p[2]
@@ -136,7 +136,7 @@ MACRO mult_array
     ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met3 ;
-        RECT 60.715 32.680 61.315 33.280 ;
+        RECT 149.400 59.880 150.000 60.480 ;
     END
   END p[2]
   PIN p[3]
@@ -145,7 +145,7 @@ MACRO mult_array
     ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met3 ;
-        RECT 0.000 31.320 0.600 31.920 ;
+        RECT 0.000 81.640 0.600 82.240 ;
     END
   END p[3]
   PIN p[4]
@@ -154,7 +154,7 @@ MACRO mult_array
     ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met3 ;
-        RECT 0.000 46.280 0.600 46.880 ;
+        RECT 149.400 96.600 150.000 97.200 ;
     END
   END p[4]
   PIN p[5]
@@ -162,8 +162,8 @@ MACRO mult_array
     USE SIGNAL ;
     ANTENNADIFFAREA 0.445500 ;
     PORT
-      LAYER met3 ;
-        RECT 60.715 50.360 61.315 50.960 ;
+      LAYER met2 ;
+        RECT 97.610 149.720 97.890 150.000 ;
     END
   END p[5]
   PIN p[6]
@@ -172,7 +172,7 @@ MACRO mult_array
     ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met2 ;
-        RECT 23.090 71.755 23.370 72.035 ;
+        RECT 56.210 149.720 56.490 150.000 ;
     END
   END p[6]
   PIN p[7]
@@ -180,8 +180,8 @@ MACRO mult_array
     USE SIGNAL ;
     ANTENNADIFFAREA 0.445500 ;
     PORT
-      LAYER met3 ;
-        RECT 60.715 54.440 61.315 55.040 ;
+      LAYER met2 ;
+        RECT 58.050 149.720 58.330 150.000 ;
     END
   END p[7]
   PIN rst_n
@@ -190,47 +190,46 @@ MACRO mult_array
     ANTENNAGATEAREA 0.159000 ;
     PORT
       LAYER met3 ;
-        RECT 60.715 16.360 61.315 16.960 ;
+        RECT 149.400 46.280 150.000 46.880 ;
     END
   END rst_n
   OBS
       LAYER nwell ;
-        RECT 5.330 10.795 55.850 59.925 ;
+        RECT 5.330 10.795 144.630 138.910 ;
       LAYER li1 ;
-        RECT 5.520 10.795 55.660 59.925 ;
+        RECT 5.520 10.795 144.440 138.805 ;
       LAYER met1 ;
-        RECT 0.530 10.640 55.960 60.080 ;
+        RECT 1.910 10.640 144.440 138.960 ;
       LAYER met2 ;
-        RECT 0.550 71.475 22.810 71.755 ;
-        RECT 23.650 71.475 54.180 71.755 ;
-        RECT 0.550 0.560 54.180 71.475 ;
-        RECT 0.550 0.070 15.450 0.560 ;
-        RECT 16.290 0.070 22.810 0.560 ;
-        RECT 23.650 0.070 24.650 0.560 ;
-        RECT 25.490 0.070 44.890 0.560 ;
-        RECT 45.730 0.070 54.180 0.560 ;
+        RECT 1.930 149.440 55.930 149.720 ;
+        RECT 56.770 149.440 57.770 149.720 ;
+        RECT 58.610 149.440 97.330 149.720 ;
+        RECT 98.170 149.440 142.970 149.720 ;
+        RECT 1.930 0.560 142.970 149.440 ;
+        RECT 1.930 0.280 46.730 0.560 ;
+        RECT 47.570 0.280 53.170 0.560 ;
+        RECT 54.010 0.280 57.770 0.560 ;
+        RECT 58.610 0.280 58.690 0.560 ;
+        RECT 59.530 0.280 59.610 0.560 ;
+        RECT 60.450 0.280 100.090 0.560 ;
+        RECT 100.930 0.280 101.930 0.560 ;
+        RECT 102.770 0.280 142.970 0.560 ;
       LAYER met3 ;
-        RECT 0.600 55.440 60.715 60.005 ;
-        RECT 1.000 54.040 60.315 55.440 ;
-        RECT 0.600 51.360 60.715 54.040 ;
-        RECT 0.600 49.960 60.315 51.360 ;
-        RECT 0.600 47.280 60.715 49.960 ;
-        RECT 1.000 45.880 60.715 47.280 ;
-        RECT 0.600 37.760 60.715 45.880 ;
-        RECT 1.000 36.360 60.715 37.760 ;
-        RECT 0.600 35.040 60.715 36.360 ;
-        RECT 1.000 33.680 60.715 35.040 ;
-        RECT 1.000 33.640 60.315 33.680 ;
-        RECT 0.600 32.320 60.315 33.640 ;
-        RECT 1.000 32.280 60.315 32.320 ;
-        RECT 1.000 30.920 60.715 32.280 ;
-        RECT 0.600 28.240 60.715 30.920 ;
-        RECT 1.000 25.480 60.715 28.240 ;
-        RECT 0.600 21.440 60.715 25.480 ;
-        RECT 1.000 20.040 60.715 21.440 ;
-        RECT 0.600 18.720 60.715 20.040 ;
-        RECT 0.600 15.960 60.315 18.720 ;
-        RECT 0.600 10.715 60.715 15.960 ;
+        RECT 0.600 97.600 149.400 138.885 ;
+        RECT 0.600 96.200 149.000 97.600 ;
+        RECT 0.600 82.640 149.400 96.200 ;
+        RECT 1.000 79.880 149.400 82.640 ;
+        RECT 0.600 74.480 149.400 79.880 ;
+        RECT 1.000 73.080 149.400 74.480 ;
+        RECT 0.600 64.960 149.400 73.080 ;
+        RECT 1.000 63.560 149.400 64.960 ;
+        RECT 0.600 60.880 149.400 63.560 ;
+        RECT 0.600 59.480 149.000 60.880 ;
+        RECT 0.600 58.160 149.400 59.480 ;
+        RECT 1.000 56.760 149.400 58.160 ;
+        RECT 0.600 47.280 149.400 56.760 ;
+        RECT 0.600 45.880 149.000 47.280 ;
+        RECT 0.600 10.715 149.400 45.880 ;
   END
 END mult_array
 END LIBRARY

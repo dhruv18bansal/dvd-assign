@@ -1,7 +1,10 @@
 sim
 gls
 mult.vcd
+mult.vcd
 *.log
 *.jou
 *.str
 __pycache__/
+pnr/runs/
+pnr/tmp/

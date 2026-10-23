@@ -5,11 +5,11 @@
     "dir::../rtl/mult_array.v"
   ],
   "CLOCK_PORT": "clk",
-  "CLOCK_PERIOD": 10.0,
+  "CLOCK_PERIOD": 6.5,
   "PNR_SDC_FILE": "dir::mult_array_pnr.sdc",
   "SIGNOFF_SDC_FILE": "dir::mult_array_pnr.sdc",
   "PDK": "sky130A",
   "STD_CELL_LIBRARY": "sky130_fd_sc_hd",
-  "FP_CORE_UTIL": 30,
-  "PL_TARGET_DENSITY_PCT": 40
+  "FP_SIZING": "absolute",
+  "DIE_AREA": [0, 0, 150, 150]
 }
