@@ -68,5 +68,23 @@ yosys -c synth/synth.tcl
 
 The flow requires `PDK_ROOT` to point to an installation containing the `sky130A`
 PDK. Generated outputs are `synth/mult_array_stat.rpt` and
-`synth/mult_array_netlist.v`. The netlist simulation and synthesis results table will
-be recorded after running this flow in the PDK environment.
+`synth/mult_array_netlist.v`.
+
+The flow was run in IIC-OSIC-TOOLS with `PDK=sky130A`. The resulting report contains
+61 cells and a total cell area of 756.976 µm². The design has 16
+`sky130_fd_sc_hd__dfrtp_1` flip-flops with 400.384 µm² combined area, or 52.89% of
+the total. The most-used cell types are `dfrtp_1` (16), `nand2_1` (7), and
+`and2_0` (4); `maj3_1` is tied with `and2_0` at 4 cells.
+
+The synthesized netlist was checked with the assignment's gate-level simulation:
+
+```sh
+CELLS="$PDK_ROOT/sky130A/libs.ref/sky130_fd_sc_hd/verilog"
+iverilog -g2012 -DFUNCTIONAL '-DUNIT_DELAY=#1' -o gls \
+  tb/tb_mult.v "$CELLS/primitives.v" "$CELLS/sky130_fd_sc_hd.v" \
+  synth/mult_array_netlist.v
+vvp gls
+```
+
+Result: `PASS: 256 vectors checked, 0 errors`. The testbench samples 2 ns after the
+second active clock edge so the unit-delay standard-cell models have time to settle.

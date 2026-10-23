@@ -29,7 +29,8 @@ module tb_mult;
                 b = bi[3:0];
                 @(posedge clk);
                 @(posedge clk);
-                #1;
+                // Allow the mapped standard-cell outputs to settle after the clock edge.
+                #2;
                 checked = checked + 1;
                 if (p !== (ai * bi)) begin
                     errors = errors + 1;
