@@ -151,20 +151,7 @@ story += [table([["Physical-design result", "Value"],
                  ["Post-route Fmax estimate", f"{postroute_fmax:.2f} MHz"],
                  ["Magic / KLayout DRC errors", f"{drc_magic} / {drc_klayout}"],
                  ["LVS errors", str(lvs)]], [64*mm, 96*mm]),
-          Spacer(1, 4*mm), P("Full-die view", "H2X")]
-full = os.path.join(ROOT, "report/assets/layout_full_die.png")
-zoom = os.path.join(ROOT, "report/assets/layout_zoom.png")
-if os.path.exists(full):
-    story.append(Image(full, width=125*mm, height=125*mm, kind="proportional"))
-else:
-    story.append(P("Full-die screenshot is stored in report/assets/layout_full_die.png.", "SmallX"))
-story += [PageBreak(), P("Layout detail and discussion", "H1X"), P("Standard-cell rows and routed metal", "H2X")]
-if os.path.exists(zoom):
-    story.append(Image(zoom, width=165*mm, height=120*mm, kind="proportional"))
-else:
-    story.append(P("Zoomed layout screenshot is stored in report/assets/layout_zoom.png.", "SmallX"))
-story += [Spacer(1, 2*mm), P("A positive final setup slack indicates that the configured period meets the reported slow-corner timing check. The post-route Fmax estimate is calculated as 1000 / (clock target − worst setup slack). Physical design adds clock-tree buffers, timing-repair buffers, tap cells, and filler cells around the synthesized logic. Routed parasitics and clock-tree effects can reduce the attainable frequency relative to pre-route STA.")]
-story += [PageBreak(), P("Short answers", "H1X")]
+          PageBreak(), P("Short answers", "H1X")]
 answers = [
     ("1. Why does synthesis not report 16 AND gates and 12 full adders?", "Those are conceptual RTL building blocks. The mapper decomposes the full adders into available standard cells, uses compound gates for sum/carry logic, and optimizes shared or redundant logic. Here it reports 61 mapped cells, including 16 sequential cells and 45 combinational cells."),
     ("2. What is the critical path and how does it compare with the expected 2N trend?", "The worst register path starts at a_reg[1] and ends at p[6], passing through eight mapped combinational cells (including compound majority and XOR/XNOR cells). The path crosses several serial carry/sum functions, consistent with ripple-like array accumulation; the exact cell depth differs from an idealized count of about 2N full-adder delays because synthesis combines Boolean functions."),
@@ -174,6 +161,56 @@ answers = [
     ("6. How does an 8-bit array multiplier scale?", "For two N-bit operands, a basic array has N² partial-product AND terms and approximately N(N−1) full adders. At N=8 this is 64 partial-product terms and about 56 full adders, compared with 16 and 12 for N=4. Using the assignment’s approximately 2N full-adder-delay estimate, path depth grows from about 8 such delays at N=4 to about 16 at N=8. Area grows approximately quadratically.")]
 for q, a in answers:
     story.append(KeepTogether([P(q, "H2X"), P(a, "BodyX")]))
+
+# Project scope, assignment coverage, final evidence, and team contribution.
+story += [PageBreak(), P("Assignment scope and evidence", "H1X"),
+          P("This submission implements and documents a registered unsigned 4-bit array multiplier from RTL through SKY130A standard-cell physical design. The table maps the assignment's main requirements to the implementation and the evidence included with the deliverables.")]
+story += [table([["Requirement", "Implementation / evidence", "Status"],
+                 ["RTL architecture", "16 partial products, 12 full adders, operand registers, and an 8-bit product register in rtl/.", "Complete"],
+                 ["Functional verification", "10 ns testbench clock; reset asserted for two rising edges; all 256 input pairs checked; PASS result and VCD waveform.", "Complete"],
+                 ["Hand calculation and fault check", "A=13, B=7 gives P=91; temporary sum fault is detected by the exhaustive testbench.", "Complete"],
+                 ["Synthesis", "Yosys SKY130A mapped netlist and statistics report; 61 cells and 756.976 um^2 area.", "Complete"],
+                 ["Gate-level verification", "Mapped netlist simulated with SKY130 functional cell models; 256 vectors pass.", "Complete"],
+                 ["Static timing", "OpenSTA typical-corner reports at 10.00 ns and 2.79 ns, including the critical path and slack.", "Complete"],
+                 ["Physical design", "LibreLane fixed 150 um x 150 um die; final metrics and GDSII; signoff DRC and LVS results.", "Complete"],
+                 ["Written analysis", "Design overview, results tables, layout views, and answers to the six assignment questions in this report.", "Complete"]],
+                [43*mm, 101*mm, 16*mm]),
+          Spacer(1, 4*mm), P("Scope and assumptions", "H2X"),
+          P("The implemented function is unsigned multiplication of two 4-bit operands, producing an 8-bit product. The interface registers both operands and the product. The report's 8-bit discussion is an architectural scaling estimate, not a separately implemented or measured 8-bit design. Timing figures are based on the stated SKY130A corners and constraints; frequency values are derived estimates, not silicon measurements.")]
+
+story += [PageBreak(), P("Final values and interpretation", "H1X"),
+          P("The following values summarize the saved simulation, synthesis, STA, and physical-design artifacts. Derived values are shown with their calculation so the basis of comparison is clear.")]
+story += [table([["Stage", "Final value", "Meaning"],
+                 ["Functional test", "256 / 256 pass", "Exhaustive 4-bit unsigned input space."],
+                 ["Fault injection", "95 mismatches detected", "The intentionally incorrect sum logic is observable to the testbench."],
+                 ["Mapped synthesis", "61 cells; 756.976 um^2", "16 resettable flip-flops use 400.384 um^2 (52.89%)."],
+                 ["Part C timing", "10.00 - 7.213 = 2.787 ns; 1000 / 2.787 = 358.808 MHz", "Tmin and pre-route Fmax estimate from typical-corner STA."],
+                 ["STA boundary check", "2.79 ns; 0.003 ns setup slack", "Near-zero positive slack at Tmin rounded to 0.01 ns."],
+                 ["Part D floorplan", "150 x 150 um die; 17,759.5 um^2 core", "Absolute die sizing in the final configuration."],
+                 ["Part D implementation", "327 standard cells; 1,224.92 um^2; 2,361 um routed wire", "Post-route standard-cell and detailed-route metrics."],
+                 ["Part D timing", "6.5 ns target; 0.14985 ns worst slow-corner slack", "Final run after seven clock-period attempts."],
+                 ["Post-route frequency", "1000 / (6.5 - 0.14985) = 157.48 MHz", "Estimate using the configured period minus worst slow-corner slack."],
+                 ["Signoff", "Magic DRC 0; KLayout DRC 0; LVS errors 0", "Saved metrics indicate clean final signoff."]],
+                [35*mm, 61*mm, 64*mm]),
+          Spacer(1, 4*mm), P("Physical-design cell additions", "H2X"),
+          P("The final metrics record 1,550 filler cells, 245 tap cells, 3 clock buffers, and 17 timing-repair buffers. These implementation cells serve layout, power, clock-tree, and timing-repair needs; they are additional to the 61 cells in the synthesized logical netlist. The final routed wirelength is taken from route__wirelength in pnr/metrics.json.")]
+
+story += [PageBreak(), P("Reproduction and contribution", "H1X"),
+          P("The source tree includes the RTL, testbench, Yosys synthesis script and outputs, OpenSTA script and timing report, LibreLane configuration, final metrics and GDSII, report source, and visual evidence. The README gives the ordered commands and expected results for each stage. The per-run working directory is intentionally excluded from the deliverables; the root-level metrics and GDSII are the final copied outputs.")]
+story += [table([["Stage", "Reproduction command / input", "Expected artifact"],
+                 ["RTL simulation", "iverilog -g2012 -o sim tb/tb_mult.v rtl/full_adder.v rtl/mult_array.v; then vvp sim", "PASS summary; mult.vcd"],
+                 ["Synthesis", "yosys -c synth/synth.tcl", "synth/mult_array_netlist.v; synth/mult_array_stat.rpt"],
+                 ["STA", "CLOCK_PERIOD=10.0 sta -exit sta/sta.tcl; repeat at 2.79 ns", "sta/mult_array_timing.rpt and critical-path data"],
+                 ["Physical design", "LibreLane using pnr/config.json and the selected sky130A PDK", "pnr/metrics.json; pnr/mult_array.gds"],
+                 ["Report", "python3 report/build_report.py", "report/report.pdf"]],
+                [32*mm, 100*mm, 28*mm]),
+          Spacer(1, 7*mm), P("Team contribution statement", "H1X"),
+          P("Dhruv Bansal (2023102048) and Dataarnoor Singh Oberoi (2023102047) contributed equally to this assignment. Both members jointly contributed to the RTL design, functional verification, synthesis and timing analysis, physical-design execution, interpretation of results, and preparation of the report.", "CalloutX"),
+          Spacer(1, 3*mm), P("Team members", "H2X"),
+          table([["Member", "Roll number", "Contribution"],
+                 ["Dhruv Bansal", "2023102048", "Equal contribution across the assignment."],
+                 ["Dataarnoor Singh Oberoi", "2023102047", "Equal contribution across the assignment."]],
+                [53*mm, 34*mm, 73*mm])]
 
 doc.build(story, onFirstPage=page, onLaterPages=page)
 print(OUT)
